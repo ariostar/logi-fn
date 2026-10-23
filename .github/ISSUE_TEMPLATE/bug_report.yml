@@ -1,0 +1,51 @@
+name: Bug report
+description: 报告无法使用、型号不兼容或状态被复位等问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请先阅读仓库中的 `docs/troubleshooting.md`，
+        并尽量附上诊断命令的完整输出。
+
+  - type: input
+    id: keyboard
+    attributes:
+      label: 键盘型号与连接方式
+      placeholder: 例如 K780 + Unifying 接收器
+    validations:
+      required: true
+
+  - type: input
+    id: windows
+    attributes:
+      label: Windows 版本
+      placeholder: 例如 Windows 11 23H2
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+      placeholder: 例如希望 F1–F12 默认发 F 键
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      placeholder: 例如按 F11 仍然调整音量
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: 诊断输出
+      description: 粘贴 `logifn.exe fn`、`list`、`dev` 的输出；使用 watch 时附日志末尾几行
+      render: text
+    validations:
+      required: false

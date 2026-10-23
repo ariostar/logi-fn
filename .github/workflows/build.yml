@@ -1,0 +1,47 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 构建
+        shell: pwsh
+        run: ./build.ps1 -Clean
+
+      - name: 校验产物
+        shell: pwsh
+        run: |
+          if (-not (Test-Path dist/logifn.exe))  { throw '缺少 dist/logifn.exe' }
+          if (-not (Test-Path dist/logifnw.exe)) { throw '缺少 dist/logifnw.exe' }
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: logifn
+          path: dist/*.exe
+          if-no-files-found: error
+
+      - name: 发布 Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create $env:GITHUB_REF_NAME `
+            dist/logifn.exe dist/logifnw.exe `
+            --title $env:GITHUB_REF_NAME `
+            --generate-notes
