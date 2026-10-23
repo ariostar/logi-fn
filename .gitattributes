@@ -1,0 +1,22 @@
+# 默认由 Git 自动判断文本文件
+* text=auto
+
+# 源码与脚本统一使用 CRLF（Windows 工程）
+*.cs    text eol=crlf
+*.ps1   text eol=crlf
+*.psm1  text eol=crlf
+*.psd1  text eol=crlf
+
+# 文档与配置使用 LF，避免跨平台 diff 噪音
+*.md    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.json  text eol=lf
+LICENSE text eol=lf
+
+# 二进制文件
+*.exe   binary
+*.dll   binary
+*.png   binary
+*.jpg   binary
+*.ico   binary

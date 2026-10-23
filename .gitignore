@@ -1,0 +1,19 @@
+# 构建产物
+/dist/
+/bin/
+/obj/
+*.exe
+*.pdb
+*.ilk
+*.obj
+*.user
+
+# 日志
+*.log
+
+# 编辑器 / 系统
+.vs/
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
